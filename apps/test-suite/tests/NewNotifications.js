@@ -2,8 +2,8 @@
 
 import { Platform } from '@unimodules/core';
 import Constants from 'expo-constants';
-import * as Notifications from 'expo-notifications';
 import * as FileSystem from 'expo-file-system';
+import * as Notifications from 'expo-notifications';
 
 import * as TestUtils from '../TestUtils';
 import { waitFor } from './helpers';
@@ -274,6 +274,38 @@ export async function test(t) {
             thumbnailUri: fileUri,
           },
         });
+      });
+    });
+
+    t.describe('getBadgeCountAsync', () => {
+      t.it('resolves with an integer', async () => {
+        const badgeCount = await Notifications.getBadgeCountAsync();
+        t.expect(typeof badgeCount).toBe('number');
+      });
+    });
+
+    t.describe('setBadgeCountAsync', () => {
+      t.it('resolves with a boolean', async () => {
+        const randomCounter = Math.ceil(Math.random() * 9) + 1;
+        const result = await Notifications.setBadgeCountAsync(randomCounter);
+        t.expect(typeof result).toBe('boolean');
+      });
+
+      t.it('sets a retrievable counter (if set succeeds)', async () => {
+        const randomCounter = Math.ceil(Math.random() * 9) + 1;
+        if (await Notifications.setBadgeCountAsync(randomCounter)) {
+          const badgeCount = await Notifications.getBadgeCountAsync();
+          t.expect(badgeCount).toBe(randomCounter);
+        } else {
+          // TODO: add t.pending() when it starts to work
+        }
+      });
+
+      t.it('clears the counter', async () => {
+        const clearingCounter = 0;
+        await Notifications.setBadgeCountAsync(clearingCounter);
+        const badgeCount = await Notifications.getBadgeCountAsync();
+        t.expect(badgeCount).toBe(clearingCounter);
       });
     });
   });
