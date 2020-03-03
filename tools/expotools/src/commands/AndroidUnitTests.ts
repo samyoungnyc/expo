@@ -34,10 +34,11 @@ async function action() {
   try {
     await spawnAsync('./gradlew', androidPackages.map(it => `:${it}:test`), {
       cwd: ANDROID_DIR,
-      stdio: 'pipe'
+      stdio: 'inherit',
+      env: { ...process.env },
     });
   } catch (error) {
-    console.error('Failed while executing:', './gradlew :' + '' + ':test')
+    console.error('Failed while executing android unit tests')
     consoleErrorOutput(error.stdout, 'stdout >', chalk.reset);
     consoleErrorOutput(error.stderr, 'stderr >', chalk.red);
     throw error;

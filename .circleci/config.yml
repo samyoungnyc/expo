@@ -787,7 +787,7 @@ jobs:
           slack_webhook: $SLACK_ANDROID_WEBHOOK
 
   android_unit_tests:
-    executor: android
+    executor: js
     steps:
       - setup
       - update_submodules
