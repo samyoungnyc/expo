@@ -796,15 +796,7 @@ jobs:
       - restore_gradle_cache
       - run:
           name: Android Unit tests
-          command: |
-            nix-shell shell.nix --pure \
-              --keep ANDROID_KEYSTORE_PASSWORD \
-              --keep ANDROID_KEY_ALIAS \
-              --keep ANDROID_KEY_PASSWORD \
-              --keep FASTLANE_SKIP_UPDATE_CHECK \
-              --keep FASTLANE_DISABLE_COLORS \
-              --keep CI \
-              --run "et android-unit-tests"
+          command: expotools android-unit-tests
           working_directory: ~/expo
       - save_gradle_cache
 
