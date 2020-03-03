@@ -796,7 +796,7 @@ jobs:
       - restore_gradle_cache
       - run:
           name: Android Unit tests
-          command: expotools android-unit-tests
+          command: nix-shell android/shell.nix --run "expotools android-unit-tests"
           working_directory: ~/expo
       - save_gradle_cache
 
