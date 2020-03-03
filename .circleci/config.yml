@@ -807,7 +807,7 @@ jobs:
               --keep FASTLANE_SKIP_UPDATE_CHECK \
               --keep FASTLANE_DISABLE_COLORS \
               --keep CI \
-              --run "et android-unit-tests"
+              --run "expotools android-unit-tests"
           working_directory: ~/expo/android
       - save_gradle_cache
 
