@@ -808,7 +808,7 @@ jobs:
               --keep FASTLANE_DISABLE_COLORS \
               --keep CI \
               --run "et android-unit-tests"
-          working_directory: ~/expo
+          working_directory: ~/expo/android
       - save_gradle_cache
 
   client_android_apk_release:
